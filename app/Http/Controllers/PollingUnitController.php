@@ -74,7 +74,11 @@ class PollingUnitController extends Controller
 
         $data = $request->all();
 
-        // sorry i didnt do validation 
+        $request->validate([
+            'polling_unit_uniqueid' => 'required',
+            'party_abbreviation' => 'required',
+            'party_score' => 'required',
+        ]);
 
         // `result_id`, `polling_unit_uniqueid`, `party_abbreviation`, 
         //         `party_score`, `entered_by_user`, `date_entered`, `user_ip_address
