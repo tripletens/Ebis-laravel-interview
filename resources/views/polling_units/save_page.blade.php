@@ -17,11 +17,11 @@
                 @endif
                 
                 @csrf
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <input type="number" required name="polling_unit_uniqueid" class="form-control" required placeholder="Enter Polling Unit Unique ID "/>
-                    </div>
+                    </div> -->
                     <div class="form-group">
-                    <select name="party_abbreviation" class="form-control" required>
+                    <select name="polling_unit_uniqueid" class="form-control" required>
                         <option value="">-- Select a Polling Unit  -- </option>
                             @if(count($polling_unit) > 0 )
                                 @foreach($polling_unit as $item)
