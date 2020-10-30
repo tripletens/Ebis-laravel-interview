@@ -56,8 +56,10 @@ class PollingUnitController extends Controller
         ->select('polling_unit.uniqueid')
             ->join('announced_pu_results', 'polling_unit.uniqueid', '=', 'announced_pu_results.polling_unit_uniqueid')
            ->sum('announced_pu_results.party_score');
-        
-        // return($polling_unit_results);
+           
+        if($polling_unit_results == 0 ){
+            $polling_unit_results = 0;
+        }
 
         return back()->with(['results'=>$polling_unit_results,'lga' => $lga]);
     }

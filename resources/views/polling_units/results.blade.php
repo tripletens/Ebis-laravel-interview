@@ -30,7 +30,11 @@
             <h5 class="card-title">Polling Units Results </h5>
                 <p class="card-text">All Polling Units results are shown here </p>
             <div class="result-div"> 
-                @if(session('results'))
+                @if(session('results') )
+                    <span class="alert alert-success"> Total Votes for {{ session('lga')->lga_name}}:  {{ session('results') }}</span><br><br>
+                @endif
+
+                @if(session('results') == 0 &&  session('lga') )
                     <span class="alert alert-success"> Total Votes for {{ session('lga')->lga_name}}:  {{ session('results') }}</span><br><br>
                 @endif
             </div>
