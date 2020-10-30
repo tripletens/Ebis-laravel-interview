@@ -15,6 +15,17 @@
                 @if(session('success'))
                     <span class="alert alert-success"> {{ session('success')}}</span><br><br>
                 @endif
+
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    <br><br>
+                @endif
                 
                 @csrf
                     <!-- <div class="form-group">

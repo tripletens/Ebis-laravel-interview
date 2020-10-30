@@ -40,6 +40,7 @@ class PollingUnitController extends Controller
 
     public function all_results_view(){
         $lga = LGA::all();
+
         $data = [
             'lga' => $lga,
         ];
@@ -48,21 +49,19 @@ class PollingUnitController extends Controller
     }
 
     public function results(Request $request){
-        $lga = $request->input('lga');
-        // $lga = LGA::all();
+        $lga_id = $request->input('lga');
+        $lga = LGA::where('lga_id', $lga_id)->first();
     
-        $polling_unit_results = PollingUnits::where('lga_id', $lga)
+        $polling_unit_results = PollingUnits::where('lga_id', $lga_id)
         ->select('polling_unit.uniqueid')
             ->join('announced_pu_results', 'polling_unit.uniqueid', '=', 'announced_pu_results.polling_unit_uniqueid')
            ->sum('announced_pu_results.party_score');
         
         // return($polling_unit_results);
-        
-        return response()->json([
-            // 'lga' => $lga,
-            'results' => $polling_unit_results
-        ]); 
+
+        return back()->with(['results'=>$polling_unit_results,'lga' => $lga]);
     }
+
 
     public function save_page(){
         $party = Party::all();
@@ -73,6 +72,8 @@ class PollingUnitController extends Controller
     public function save(Request $request){
 
         $data = $request->all();
+
+        // sorry i didnt do validation 
 
         $request->validate([
             'polling_unit_uniqueid' => 'required',
